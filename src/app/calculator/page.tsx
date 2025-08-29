@@ -1,8 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-type Mode = 'CPM'|'CPC'|'CPA';
+type Mode = 'CPM' | 'CPC' | 'CPA';
+
 type ForecastResp = {
   ok: boolean;
   error?: string;
@@ -17,34 +18,60 @@ type ForecastResp = {
   epom?: { status:number; data:any };
 };
 
-const CATEGORIES = [
-  'Gambling - Online gambling',
-  // add more as needed
-];
-
-const COUNTRIES = [
-  { label: 'Nigeria (NG)', value:'NG' },
-  { label: 'Sweden (SE)',  value:'SE' },
-];
+type Pair = {
+  category: string;
+  country: { label: string; value: string };
+};
 
 export default function CalculatorPage(){
   const [mode, setMode] = useState<Mode>('CPM');
+  const [categories, setCategories] = useState<string[]>([]);
+  const [countries, setCountries] = useState<{label:string; value:string}[]>([]);
+  const [pairs, setPairs] = useState<Pair[]>([]);
 
-  const [category, setCategory] = useState(CATEGORIES[0]);
-  const [country, setCountry]   = useState('NG');
+  const [category, setCategory] = useState('');
+  const [country, setCountry]   = useState('');
   const [dailyBudget, setB]     = useState(500);
   const [days, setDays]         = useState(90);
   const [mConv, setMConv]       = useState(1000);
   const [mUsers, setMUsers]     = useState(250000);
-  const [unitCost, setUnitCost] = useState(8);    
-  const [ctrOverride, setCtr]   = useState<string>('');
 
   const [loading, setLoading]   = useState(false);
   const [resp, setResp]         = useState<ForecastResp| null>(null);
 
-  const unitLabel = useMemo(()=>(
-    mode==='CPM' ? 'CPM (USD)' : mode==='CPC' ? 'CPC (USD)' : 'CPA (USD)'
-  ),[mode]);
+  useEffect(() => {
+    async function fetchMeta() {
+      const res = await fetch('/api/goal-forecast/meta');
+      const data = await res.json();
+      setPairs(data.pairs || []);
+      setCategories(data.categories || []);
+      if (data.categories?.length) {
+        const firstCat = data.categories[0];
+        setCategory(firstCat);
+
+        const validCountries = (data.pairs || [])
+          .filter((p: Pair) => p.category === firstCat)
+          .map((p: Pair) => p.country);
+        setCountries(validCountries);
+        if (validCountries.length > 0) {
+          setCountry(validCountries[0].value);
+        }
+      }
+    }
+    fetchMeta();
+  }, []);
+
+  useEffect(() => {
+    if (!category) return;
+    const validCountries = pairs
+      .filter(p => p.category === category)
+      .map(p => p.country);
+
+    setCountries(validCountries);
+    if (validCountries.length > 0) {
+      setCountry(validCountries[0].value);
+    }
+  }, [category, pairs]);
 
   async function run(){
     setLoading(true);
@@ -58,9 +85,8 @@ export default function CalculatorPage(){
           durationDays: Number(days),
           monthlyConversionsAvg: Number(mConv),
           monthlyUniqueUsersAvg: Number(mUsers),
-          category, countryIso2: country,
-          unitCost: Number(unitCost),
-          ctrOverride: ctrOverride ? Number(ctrOverride) : undefined,
+          category,
+          countryIso2: country,
           useEpom: false 
         })
       });
@@ -91,14 +117,14 @@ export default function CalculatorPage(){
           <div className="calc-field">
             <label>Categories</label>
             <select className="calc-select" value={category} onChange={e=>setCategory(e.target.value)}>
-              {CATEGORIES.map(c=> <option key={c} value={c}>{c}</option>)}
+              {categories.map(c=> <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
 
           <div className="calc-field">
             <label>Countries</label>
             <select className="calc-select" value={country} onChange={e=>setCountry(e.target.value)}>
-              {COUNTRIES.map(c=> <option key={c.value} value={c.value}>{c.label}</option>)}
+              {countries.map(c=> <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
           </div>
 
@@ -125,18 +151,6 @@ export default function CalculatorPage(){
             <input className="calc-input" type="number" value={mUsers}
                    onChange={e=>setMUsers(+e.target.value)} />
           </div>
-
-          <div className="calc-field">
-            <label>{unitLabel}</label>
-            <input className="calc-input" type="number" step="0.01" value={unitCost}
-                   onChange={e=>setUnitCost(+e.target.value)} />
-          </div>
-
-          <div className="calc-field">
-            <label>CTR override (0–1) (optional)</label>
-            <input className="calc-input" type="number" step="0.001" value={ctrOverride}
-                   onChange={e=>setCtr(e.target.value)} placeholder="Leave blank to use benchmark" />
-          </div>
         </div>
 
         <div className="calc-actions">
@@ -156,12 +170,24 @@ export default function CalculatorPage(){
             {/* Rates summary */}
             {resp.rates && (
               <div className="result" style={{marginTop:12}}>
-                {(['CPM','CPC','CPA'] as const).map(k=>(
-                  <div className="box" key={k}>
-                    <div className="k">{k}</div>
-                    <div className="v">{resp.rates![k].toLocaleString(undefined,{maximumFractionDigits:4})}</div>
+                {mode === 'CPM' && (
+                  <div className="box">
+                    <div className="k">CPM</div>
+                    <div className="v">{resp.rates.CPM.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
                   </div>
-                ))}
+                )}
+                {mode === 'CPC' && (
+                  <div className="box">
+                    <div className="k">CPC</div>
+                    <div className="v">{resp.rates.CPC.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
+                  </div>
+                )}
+                {mode === 'CPA' && (
+                  <div className="box">
+                    <div className="k">CPA</div>
+                    <div className="v">{resp.rates.CPA.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
+                  </div>
+                )}
                 <div className="box">
                   <div className="k">CTR</div>
                   <div className="v">{(resp.rates.CTR*100).toFixed(2)}%</div>
@@ -173,7 +199,6 @@ export default function CalculatorPage(){
               </div>
             )}
 
-            {/* Totals min/base/max */}
             <div className="result" style={{marginTop:12}}>
               <div className="box">
                 <div className="k">Impressions</div>

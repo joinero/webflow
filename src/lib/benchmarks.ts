@@ -11,102 +11,61 @@ export interface BenchData {
   CPA: number;
 }
 
-interface BenchDataRaw {
-  CTR: number[];
-  CPM: number[];
-  CPC: number[];
-  CPA: number[];
-}
-
-function normalizeCountry(token: string): string | null {
-  const map: Record<string, string> = {
-    CAN: "CA",
-    USA: "US",
-    USE: "US",
-    AUS: "AU",
-    SU: "RU",
-    MB: "MQ",
-    WL: "LC",
-    UP: "UA",
-  };
-  if (map[token]) return map[token];
-  if (/^[A-Z]{2}$/.test(token)) return token;
-  return null;
-}
-
-function extractCountry(name: string): string | null {
-  const tokens = name.split(/[-_]/).map((t) => t.trim());
-  for (const t of tokens) {
-    const c = normalizeCountry(t);
-    if (c) return c;
-  }
-  return null;
-}
-
-let cachedBench: Record<Key, BenchData> | null = null;
+let cachedBench: Record<string, BenchData> | null = null;
 
 const DEFAULTS: BenchData = {
-  CTR: 0.01, 
-  CPM: 5,    
-  CPC: 1,   
-  CPA: 10,   
+  CTR: 0.01,
+  CPM: 5,
+  CPC: 1,
+  CPA: 10,
 };
 
-export async function loadBenchmarks(): Promise<Record<Key, BenchData>> {
+export async function loadBenchmarks(): Promise<Record<string, BenchData>> {
   if (cachedBench) return cachedBench;
 
-  const files = ["test_1.csv", "Test2.csv"];
-  const raw: Record<Key, BenchDataRaw> = {} as Record<Key, BenchDataRaw>;
-
-  for (const file of files) {
-    const csvPath = path.join(process.cwd(), "src/data", file);
-    if (!fs.existsSync(csvPath)) continue;
-
-    const content = fs.readFileSync(csvPath, "utf8");
-    const parsed = Papa.parse<Record<string, string>>(content, { header: true }).data;
-
-    for (const row of parsed) {
-      const name = row["campaign_name"];
-      const brand = row["client_brand_name"];
-      if (!name || !brand) continue;
-
-      const country = extractCountry(name);
-      if (!country) continue;
-
-      const ctr = parseFloat(row["ctr"]);
-      const cpm = parseFloat(row["cpm"]);
-      const cpc = parseFloat(row["cpc"]);
-      const cpa = parseFloat(row["cpa"]);
-
-      const key: Key = `${brand.trim()}|${country}`;
-
-      if (!raw[key]) {
-        raw[key] = { CTR: [], CPM: [], CPC: [], CPA: [] };
-      }
-
-      if (!isNaN(ctr)) raw[key].CTR.push(ctr);
-      if (!isNaN(cpm)) raw[key].CPM.push(cpm);
-      if (!isNaN(cpc)) raw[key].CPC.push(cpc);
-      if (!isNaN(cpa)) raw[key].CPA.push(cpa);
-    }
+  const csvPath = path.join(process.cwd(), "src/data", "locations-USD_all_time.csv");
+  if (!fs.existsSync(csvPath)) {
+    console.warn("⚠️ Benchmarks file not found:", csvPath);
+    return {};
   }
 
-  const averaged: Record<Key, BenchData> = {};
-  for (const key of Object.keys(raw) as Key[]) {
-    const v = raw[key];
-    averaged[key] = {
-      CTR: v.CTR.length ? v.CTR.reduce((a, b) => a + b, 0) / v.CTR.length : DEFAULTS.CTR,
-      CPM: v.CPM.length ? v.CPM.reduce((a, b) => a + b, 0) / v.CPM.length : DEFAULTS.CPM,
-      CPC: v.CPC.length ? v.CPC.reduce((a, b) => a + b, 0) / v.CPC.length : DEFAULTS.CPC,
-      CPA: v.CPA.length ? v.CPA.reduce((a, b) => a + b, 0) / v.CPA.length : DEFAULTS.CPA,
+  const content = fs.readFileSync(csvPath, "utf8");
+  const parsed = Papa.parse<Record<string, string>>(content, {
+    header: true,
+    skipEmptyLines: true,
+  }).data;
+
+  const bench: Record<string, BenchData> = {};
+
+  for (const row of parsed) {
+    const code = row["country_code"];
+    const name = row["country_name"];
+
+    if (!code || !name) continue;
+
+    const ctr = parseFloat(row["ctr"]);
+    const cpm = parseFloat(row["cpm"]);
+    const cpc = parseFloat(row["cpc"]);
+    const cpa = parseFloat(row["cpa"]);
+
+    // Key will just be "ALL|<country_code>" since we don’t have brand/category in this CSV
+    const key = `ALL|${code}`;
+
+    bench[key] = {
+      CTR: !isNaN(ctr) ? ctr : DEFAULTS.CTR,
+      CPM: !isNaN(cpm) ? cpm : DEFAULTS.CPM,
+      CPC: !isNaN(cpc) ? cpc : DEFAULTS.CPC,
+      CPA: !isNaN(cpa) ? cpa : DEFAULTS.CPA,
     };
   }
 
-  cachedBench = averaged;
-  return averaged;
+  cachedBench = bench;
+  return bench;
 }
 
 export async function getBench(category: string, iso2: string): Promise<BenchData> {
   const all = await loadBenchmarks();
-  return all[`${category}|${iso2}`] ?? DEFAULTS;
+
+  // Try to fetch with ALL|<country_code>
+  return all[`ALL|${iso2}`] ?? DEFAULTS;
 }

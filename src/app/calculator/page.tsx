@@ -1,97 +1,104 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { message } from 'antd';
 
-type Mode = 'CPM' | 'CPC' | 'CPA';
+type Mode = 'CPM' | 'CPC';
 
-type ForecastResp = {
+interface Country {
+  label: string;
+  value: string;
+}
+
+interface ForecastRates {
+  CTR: number;
+  CVR: number;
+  CPM: number;
+  CPC: number;
+}
+
+interface Totals {
+  impressions: { min: number; base: number; max: number };
+  clicks: { min: number; base: number; max: number };
+  conversions: { min: number; base: number; max: number };
+}
+
+interface ForecastResp {
   ok: boolean;
   error?: string;
-  mode?: Mode;
-  rates?: { CTR:number; CVR:number; CPM:number; CPC:number; CPA:number };
-  daily?: { impressions:number; clicks:number; conversions:number };
-  totals?: {
-    impressions:{min:number;base:number;max:number};
-    clicks:{min:number;base:number;max:number};
-    conversions:{min:number;base:number;max:number};
-  };
-  epom?: { status:number; data:any };
-};
+  errors?: Record<string, string>;
+  rates?: ForecastRates;
+  daily?: { impressions: number; clicks: number; conversions: number };
+  totals?: Totals;
+}
 
-type Pair = {
-  category: string;
-  country: { label: string; value: string };
-};
-
-export default function CalculatorPage(){
+export default function CalculatorPage() {
+  const [website, setWebsite] = useState('');
+  const [email, setEmail] = useState('');
+  const [category, setCategory] = useState<'iGaming' | 'Finance'>('iGaming');
+  const [country, setCountry] = useState('US');
+  const [dailyBudget, setB] = useState(500);
+  const [days, setDays] = useState(90);
+  const [mConv, setMConv] = useState(1000);
+  const [mUsers, setMUsers] = useState(250000);
   const [mode, setMode] = useState<Mode>('CPM');
-  const [categories, setCategories] = useState<string[]>([]);
-  const [countries, setCountries] = useState<{label:string; value:string}[]>([]);
-  const [pairs, setPairs] = useState<Pair[]>([]);
 
-  const [category, setCategory] = useState('');
-  const [country, setCountry]   = useState('');
-  const [dailyBudget, setB]     = useState(500);
-  const [days, setDays]         = useState(90);
-  const [mConv, setMConv]       = useState(1000);
-  const [mUsers, setMUsers]     = useState(250000);
+  const [loading, setLoading] = useState(false);
+  const [resp, setResp] = useState<ForecastResp | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [countries, setCountries] = useState<Country[]>([]);
 
-  const [loading, setLoading]   = useState(false);
-  const [resp, setResp]         = useState<ForecastResp| null>(null);
-
+  // Fetch countries on mount
   useEffect(() => {
-    async function fetchMeta() {
-      const res = await fetch('/api/goal-forecast/meta');
-      const data = await res.json();
-      setPairs(data.pairs || []);
-      setCategories(data.categories || []);
-      if (data.categories?.length) {
-        const firstCat = data.categories[0];
-        setCategory(firstCat);
-
-        const validCountries = (data.pairs || [])
-          .filter((p: Pair) => p.category === firstCat)
-          .map((p: Pair) => p.country);
-        setCountries(validCountries);
-        if (validCountries.length > 0) {
-          setCountry(validCountries[0].value);
+    async function fetchCountries() {
+      try {
+        const r = await fetch('/api/goal-forecast');
+        const data = await r.json();
+        if (data.countries) {
+          setCountries(data.countries);
         }
+      } catch (err) {
+        console.error('Failed to fetch countries', err);
       }
     }
-    fetchMeta();
+    fetchCountries();
   }, []);
 
-  useEffect(() => {
-    if (!category) return;
-    const validCountries = pairs
-      .filter(p => p.category === category)
-      .map(p => p.country);
-
-    setCountries(validCountries);
-    if (validCountries.length > 0) {
-      setCountry(validCountries[0].value);
-    }
-  }, [category, pairs]);
-
-  async function run(){
+  async function run() {
     setLoading(true);
-    try{
-      const r = await fetch('/api/goal-forecast',{
-        method:'POST',
-        headers:{'content-type':'application/json'},
+    setErrors({});
+    try {
+      const r = await fetch('/api/goal-forecast', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
+          website,
+          email,
+          category,
+          country,
           mode,
           dailyBudget: Number(dailyBudget),
           durationDays: Number(days),
           monthlyConversionsAvg: Number(mConv),
           monthlyUniqueUsersAvg: Number(mUsers),
-          category,
-          countryIso2: country,
-          useEpom: false 
-        })
+        }),
       });
-      const j = await r.json() as ForecastResp;
+
+      const j: ForecastResp = await r.json();
+
+      if (!r.ok || !j.ok) {
+        if (j.errors) {
+          setErrors(j.errors);
+        } else {
+          message.error(j.error || 'Invalid input, please check your details');
+        }
+        return;
+      }
+
       setResp(j);
+    } catch (err) {
+      console.error(err);
+      message.error('Something went wrong, please try again.');
     } finally {
       setLoading(false);
     }
@@ -102,54 +109,129 @@ export default function CalculatorPage(){
       <div className="calc-card">
         <h1 className="calc-title">Goal forecast</h1>
 
-        {/* Tabs */}
-        <div className="calc-actions" style={{marginTop:0}}>
-          {(['CPM','CPC','CPA'] as Mode[]).map(m => (
-            <button key={m}
+        {/* Mode Tabs */}
+        <div className="calc-actions" style={{ marginTop: 0 }}>
+          {(['CPM', 'CPC'] as Mode[]).map((m) => (
+            <button
+              key={m}
               className="calc-btn"
-              style={{background: mode===m ? 'var(--accent)' : '#e5e7eb', color: mode===m ? '#fff' : '#111'}}
-              onClick={()=>setMode(m)}
-            >{m}</button>
+              style={{
+                background: mode === m ? 'var(--accent)' : '#e5e7eb',
+                color: mode === m ? '#fff' : '#111',
+              }}
+              onClick={() => setMode(m)}
+            >
+              {m}
+            </button>
           ))}
         </div>
 
-        <div className="calc-grid" style={{marginTop:16}}>
+        <div className="calc-grid" style={{ marginTop: 16 }}>
+          {/* Website */}
           <div className="calc-field">
-            <label>Categories</label>
-            <select className="calc-select" value={category} onChange={e=>setCategory(e.target.value)}>
-              {categories.map(c=> <option key={c} value={c}>{c}</option>)}
-            </select>
+            <label>Website</label>
+            <input
+              className="calc-input"
+              type="text"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+            {errors.website && <div className="error-text">{errors.website}</div>}
           </div>
 
+          {/* Email */}
           <div className="calc-field">
-            <label>Countries</label>
-            <select className="calc-select" value={country} onChange={e=>setCountry(e.target.value)}>
-              {countries.map(c=> <option key={c.value} value={c.value}>{c.label}</option>)}
-            </select>
+            <label>Email</label>
+            <input
+              className="calc-input"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <div className="error-text">{errors.email}</div>}
           </div>
 
+          {/* Category */}
+          <div className="calc-field">
+            <label>Category</label>
+            <select
+              className="calc-select"
+              value={category}
+              onChange={(e) => setCategory(e.target.value as 'iGaming' | 'Finance')}
+            >
+              <option value="iGaming">iGaming</option>
+              <option value="Finance">Finance</option>
+            </select>
+            {errors.category && <div className="error-text">{errors.category}</div>}
+          </div>
+
+          {/* Country */}
+          <div className="calc-field">
+            <label>Country</label>
+            <select
+              className="calc-select"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              {countries.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+            {errors.country && <div className="error-text">{errors.country}</div>}
+          </div>
+
+          {/* Daily Budget */}
           <div className="calc-field">
             <label>Daily budget (USD)</label>
-            <input className="calc-input" type="number" value={dailyBudget}
-                   onChange={e=>setB(+e.target.value)} />
+            <input
+              className="calc-input"
+              type="number"
+              value={dailyBudget}
+              onChange={(e) => setB(+e.target.value)}
+            />
+            {errors.dailyBudget && <div className="error-text">{errors.dailyBudget}</div>}
           </div>
 
+          {/* Duration */}
           <div className="calc-field">
             <label>Duration (days)</label>
-            <input className="calc-input" type="number" value={days}
-                   onChange={e=>setDays(+e.target.value)} />
+            <input
+              className="calc-input"
+              type="number"
+              value={days}
+              onChange={(e) => setDays(+e.target.value)}
+            />
+            {errors.durationDays && <div className="error-text">{errors.durationDays}</div>}
           </div>
 
+          {/* Monthly conversions */}
           <div className="calc-field">
             <label>Monthly conversions (avg)</label>
-            <input className="calc-input" type="number" value={mConv}
-                   onChange={e=>setMConv(+e.target.value)} />
+            <input
+              className="calc-input"
+              type="number"
+              value={mConv}
+              onChange={(e) => setMConv(+e.target.value)}
+            />
+            {errors.monthlyConversionsAvg && (
+              <div className="error-text">{errors.monthlyConversionsAvg}</div>
+            )}
           </div>
 
+          {/* Monthly users */}
           <div className="calc-field">
             <label>Monthly unique users (avg)</label>
-            <input className="calc-input" type="number" value={mUsers}
-                   onChange={e=>setMUsers(+e.target.value)} />
+            <input
+              className="calc-input"
+              type="number"
+              value={mUsers}
+              onChange={(e) => setMUsers(+e.target.value)}
+            />
+            {errors.monthlyUniqueUsersAvg && (
+              <div className="error-text">{errors.monthlyUniqueUsersAvg}</div>
+            )}
           </div>
         </div>
 
@@ -157,76 +239,53 @@ export default function CalculatorPage(){
           <button className="calc-btn" onClick={run} disabled={loading}>
             {loading ? 'Calculating…' : 'Run forecast'}
           </button>
-          {resp?.epom && resp.mode==='CPM' && (
-            <div style={{color:'#475569', alignSelf:'center'}}>
-              Epom: {resp.epom.status}
-            </div>
-          )}
         </div>
 
         {/* Results */}
         {resp?.ok && resp.totals && (
           <>
-            {/* Rates summary */}
             {resp.rates && (
-              <div className="result" style={{marginTop:12}}>
+              <div className="result" style={{ marginTop: 12 }}>
                 {mode === 'CPM' && (
                   <div className="box">
                     <div className="k">CPM</div>
-                    <div className="v">{resp.rates.CPM.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
+                    <div className="v">{resp.rates.CPM.toFixed(2)}</div>
                   </div>
                 )}
                 {mode === 'CPC' && (
                   <div className="box">
                     <div className="k">CPC</div>
-                    <div className="v">{resp.rates.CPC.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
-                  </div>
-                )}
-                {mode === 'CPA' && (
-                  <div className="box">
-                    <div className="k">CPA</div>
-                    <div className="v">{resp.rates.CPA.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
+                    <div className="v">{resp.rates.CPC.toFixed(2)}</div>
                   </div>
                 )}
                 <div className="box">
                   <div className="k">CTR</div>
-                  <div className="v">{(resp.rates.CTR*100).toFixed(2)}%</div>
+                  <div className="v">{(resp.rates.CTR * 100).toFixed(2)}%</div>
                 </div>
                 <div className="box">
                   <div className="k">CVR</div>
-                  <div className="v">{(resp.rates.CVR*100).toFixed(2)}%</div>
+                  <div className="v">{(resp.rates.CVR * 100).toFixed(2)}%</div>
                 </div>
               </div>
             )}
-
-            <div className="result" style={{marginTop:12}}>
+            <div className="result" style={{ marginTop: 12 }}>
               <div className="box">
                 <div className="k">Impressions</div>
-                <div className="v">{resp.totals.impressions.base.toLocaleString()}</div>
-                <div className="k">Range</div>
-                <div>{resp.totals.impressions.min.toLocaleString()} – {resp.totals.impressions.max.toLocaleString()}</div>
+                <div className="v">{(resp.totals.impressions.base.toFixed(0))}</div>
               </div>
               <div className="box">
                 <div className="k">Clicks</div>
-                <div className="v">{resp.totals.clicks.base.toLocaleString()}</div>
-                <div className="k">Range</div>
-                <div>{resp.totals.clicks.min.toLocaleString()} – {resp.totals.clicks.max.toLocaleString()}</div>
+                <div className="v">{(resp.totals.clicks.base.toFixed(0))}</div>
               </div>
               <div className="box">
                 <div className="k">Conversions</div>
-                <div className="v">{resp.totals.conversions.base.toLocaleString(undefined,{maximumFractionDigits:2})}</div>
-                <div className="k">Range</div>
-                <div>{resp.totals.conversions.min.toLocaleString(undefined,{maximumFractionDigits:2})} – {resp.totals.conversions.max.toLocaleString(undefined,{maximumFractionDigits:2})}</div>
+                <div className="v">{(resp.totals.conversions.base.toFixed(0))}</div>
               </div>
             </div>
-            <div style={{marginTop:8,color:'#475569'}}>Estimates based on inputs and benchmarks; actuals may vary.</div>
+            <div style={{ marginTop: 8, color: '#475569' }}>
+              Estimates based on inputs and benchmarks; actuals may vary.
+            </div>
           </>
-        )}
-
-        {resp && !resp.ok && (
-          <div style={{marginTop:12,color:'#b91c1c',fontWeight:600}}>
-            {resp.error || 'Something went wrong.'}
-          </div>
         )}
       </div>
     </div>

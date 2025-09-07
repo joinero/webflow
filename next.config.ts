@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // 👇 force Next.js to treat this project folder as the root
+  outputFileTracingRoot: __dirname,
+
+  reactStrictMode: true,
 };
 
 export default nextConfig;

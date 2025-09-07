@@ -1,0 +1,1556 @@
+[
+  {
+    "website": "Test",
+    "email": "Test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 6.64451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 11960132.89036545,
+          "base": 14950166.11295681,
+          "max": 17940199.335548174
+        },
+        "clicks": {
+          "min": 119601.3289036545,
+          "base": 149501.66112956812,
+          "max": 179401.99335548174
+        },
+        "conversions": {
+          "min": 478.4053156146181,
+          "base": 598.0066445182725,
+          "max": 717.607973421927
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T07:21:04.380Z"
+  },
+  {
+    "website": "Another Test",
+    "email": "anothertest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 6.64451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 11960132.89036545,
+          "base": 14950166.11295681,
+          "max": 17940199.335548174
+        },
+        "clicks": {
+          "min": 119601.3289036545,
+          "base": 149501.66112956812,
+          "max": 179401.99335548174
+        },
+        "conversions": {
+          "min": 478.4053156146181,
+          "base": 598.0066445182725,
+          "max": 717.607973421927
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T07:25:44.277Z"
+  },
+  {
+    "website": "Another Test",
+    "email": "anothertest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 100,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 0.664451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 11960132.89036545,
+          "base": 14950166.11295681,
+          "max": 17940199.335548174
+        },
+        "clicks": {
+          "min": 119601.3289036545,
+          "base": 149501.66112956812,
+          "max": 179401.99335548174
+        },
+        "conversions": {
+          "min": 47.8405315614618,
+          "base": 59.80066445182725,
+          "max": 71.7607973421927
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.0004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T07:25:49.141Z"
+  },
+  {
+    "website": "Another Test",
+    "email": "anothertest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 9,
+    "monthlyConversionsAvg": 100,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 0.664451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 1196013.289036545,
+          "base": 1495016.6112956812,
+          "max": 1794019.9335548175
+        },
+        "clicks": {
+          "min": 11960.13289036545,
+          "base": 14950.166112956813,
+          "max": 17940.199335548175
+        },
+        "conversions": {
+          "min": 4.7840531561461805,
+          "base": 5.980066445182725,
+          "max": 7.17607973421927
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.0004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T07:25:52.100Z"
+  },
+  {
+    "website": "Another Test",
+    "email": "anothertest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 4,
+    "monthlyConversionsAvg": 100,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 0.664451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 531561.46179402,
+          "base": 664451.827242525,
+          "max": 797342.1926910299
+        },
+        "clicks": {
+          "min": 5315.6146179402,
+          "base": 6644.51827242525,
+          "max": 7973.4219269103
+        },
+        "conversions": {
+          "min": 2.1262458471760803,
+          "base": 2.6578073089701,
+          "max": 3.18936877076412
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.0004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T07:26:44.619Z"
+  },
+  {
+    "website": "Another Test",
+    "email": "anothertest@gmail.com",
+    "country": "US",
+    "category": "Finance",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 4,
+    "monthlyConversionsAvg": 10,
+    "monthlyUniqueUsersAvg": 2500,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 6.64451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 531561.46179402,
+          "base": 664451.827242525,
+          "max": 797342.1926910299
+        },
+        "clicks": {
+          "min": 5315.6146179402,
+          "base": 6644.51827242525,
+          "max": 7973.4219269103
+        },
+        "conversions": {
+          "min": 21.2624584717608,
+          "base": 26.578073089701,
+          "max": 31.8936877076412
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T07:39:19.804Z"
+  },
+  {
+    "website": "Another Test",
+    "email": "anothertest@gmail.com",
+    "country": "US",
+    "category": "Finance",
+    "mode": "CPC",
+    "dailyBudget": 50,
+    "durationDays": 3,
+    "monthlyConversionsAvg": 10,
+    "monthlyUniqueUsersAvg": 2500,
+    "results": {
+      "daily": {
+        "impressions": 2475.2475247524753,
+        "clicks": 24.752475247524753,
+        "conversions": 0.09900990099009901
+      },
+      "totals": {
+        "impressions": {
+          "min": 5940.594059405941,
+          "base": 7425.742574257426,
+          "max": 8910.89108910891
+        },
+        "clicks": {
+          "min": 59.40594059405941,
+          "base": 74.25742574257426,
+          "max": 89.10891089108911
+        },
+        "conversions": {
+          "min": 0.23762376237623767,
+          "base": 0.29702970297029707,
+          "max": 0.3564356435643565
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.004,
+      "CPM": 20.2,
+      "CPC": 2.02
+    },
+    "createdAt": "2025-09-02T07:40:08.320Z"
+  },
+  {
+    "website": "Test Website ",
+    "email": "test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 166112.95681063124,
+        "clicks": 1661.1295681063125,
+        "conversions": 6.64451827242525
+      },
+      "totals": {
+        "impressions": {
+          "min": 11960132.89036545,
+          "base": 14950166.11295681,
+          "max": 17940199.335548174
+        },
+        "clicks": {
+          "min": 119601.3289036545,
+          "base": 149501.66112956812,
+          "max": 179401.99335548174
+        },
+        "conversions": {
+          "min": 478.4053156146181,
+          "base": 598.0066445182725,
+          "max": 717.607973421927
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.004,
+      "CPM": 3.01,
+      "CPC": 0.301
+    },
+    "createdAt": "2025-09-02T14:12:12.476Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "test@gmail.com",
+    "country": "PL",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 100000,
+        "clicks": 1000,
+        "conversions": 4
+      },
+      "totals": {
+        "impressions": {
+          "min": 7200000,
+          "base": 9000000,
+          "max": 10800000
+        },
+        "clicks": {
+          "min": 72000,
+          "base": 90000,
+          "max": 108000
+        },
+        "conversions": {
+          "min": 288,
+          "base": 360,
+          "max": 432
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.01,
+      "CVR": 0.004,
+      "CPM": 5,
+      "CPC": 1
+    },
+    "createdAt": "2025-09-03T18:13:27.737Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-05T06:09:26.915Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "test@gmail.com",
+    "country": "CA",
+    "category": "iGaming",
+    "mode": "CPC",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 830985.262927951,
+        "clicks": 338.1094249198473,
+        "conversions": 1.3524376996793892
+      },
+      "totals": {
+        "impressions": {
+          "min": 59830938.93081247,
+          "base": 74788673.66351558,
+          "max": 89746408.3962187
+        },
+        "clicks": {
+          "min": 24343.87859422901,
+          "base": 30429.84824278626,
+          "max": 36515.81789134351
+        },
+        "conversions": {
+          "min": 97.37551437691603,
+          "base": 121.71939297114503,
+          "max": 146.06327156537404
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0004068777630646892,
+      "CVR": 0.004,
+      "CPM": 0.6016953877596642,
+      "CPC": 1.4788111869952478
+    },
+    "createdAt": "2025-09-05T06:18:04.704Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "Test@gmail.com",
+    "country": "CA",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 830985.262927951,
+        "clicks": 338.1094249198473,
+        "conversions": 1.3524376996793892
+      },
+      "totals": {
+        "impressions": {
+          "min": 59830938.93081247,
+          "base": 74788673.66351558,
+          "max": 89746408.3962187
+        },
+        "clicks": {
+          "min": 24343.87859422901,
+          "base": 30429.84824278626,
+          "max": 36515.81789134351
+        },
+        "conversions": {
+          "min": 97.37551437691603,
+          "base": 121.71939297114503,
+          "max": 146.06327156537404
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0004068777630646892,
+      "CVR": 0.004,
+      "CPM": 0.6016953877596642,
+      "CPC": 1.4788111869952478
+    },
+    "createdAt": "2025-09-05T14:16:54.565Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "Test@gmail.com",
+    "country": "AR",
+    "category": "iGaming",
+    "mode": "CPC",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 1426385.1321874182,
+        "clicks": 2015.5309309833349,
+        "conversions": 8.06212372393334
+      },
+      "totals": {
+        "impressions": {
+          "min": 102699729.51749411,
+          "base": 128374661.89686763,
+          "max": 154049594.27624115
+        },
+        "clicks": {
+          "min": 145118.22703080013,
+          "base": 181397.78378850015,
+          "max": 217677.34054620017
+        },
+        "conversions": {
+          "min": 580.4729081232005,
+          "base": 725.5911351540005,
+          "max": 870.7093621848006
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0014130341697353773,
+      "CVR": 0.004,
+      "CPM": 0.3505364636220164,
+      "CPC": 0.24807359307359306
+    },
+    "createdAt": "2025-09-05T14:17:12.234Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "Test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-05T14:18:37.856Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "Test@gmail.com",
+    "country": "AT",
+    "category": "iGaming",
+    "mode": "CPC",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 357669.5982705942,
+        "clicks": 215.14467276357797,
+        "conversions": 0.860578691054312
+      },
+      "totals": {
+        "impressions": {
+          "min": 25752211.075482786,
+          "base": 32190263.84435348,
+          "max": 38628316.61322417
+        },
+        "clicks": {
+          "min": 15490.416438977616,
+          "base": 19363.02054872202,
+          "max": 23235.624658466422
+        },
+        "conversions": {
+          "min": 61.96166575591047,
+          "base": 77.45208219488808,
+          "max": 92.9424986338657
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0006015179199010667,
+      "CVR": 0.004,
+      "CPM": 1.3979382156537832,
+      "CPC": 2.3240175718849843
+    },
+    "createdAt": "2025-09-05T14:20:16.152Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "Test@gmail.com",
+    "country": "AT",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 30,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 357669.5982705943,
+        "clicks": 215.14467276357803,
+        "conversions": 0.8605786910543122
+      },
+      "totals": {
+        "impressions": {
+          "min": 8584070.358494265,
+          "base": 10730087.94811783,
+          "max": 12876105.537741395
+        },
+        "clicks": {
+          "min": 5163.472146325873,
+          "base": 6454.340182907341,
+          "max": 7745.208219488809
+        },
+        "conversions": {
+          "min": 20.65388858530349,
+          "base": 25.817360731629364,
+          "max": 30.980832877955237
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0006015179199010667,
+      "CVR": 0.004,
+      "CPM": 1.3979382156537832,
+      "CPC": 2.3240175718849843
+    },
+    "createdAt": "2025-09-05T14:21:16.685Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "Test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 30,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 2788213.980420954,
+          "base": 3485267.475526192,
+          "max": 4182320.9706314304
+        },
+        "clicks": {
+          "min": 2135.973427788059,
+          "base": 2669.9667847350734,
+          "max": 3203.960141682088
+        },
+        "conversions": {
+          "min": 8.543893711152235,
+          "base": 10.679867138940294,
+          "max": 12.815840566728353
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-05T14:21:51.426Z"
+  },
+  {
+    "website": "Test Email Func",
+    "email": "email@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-06T20:02:29.517Z"
+  },
+  {
+    "website": "test email func",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-06T20:02:59.961Z"
+  },
+  {
+    "website": "test email func",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-06T20:06:32.947Z"
+  },
+  {
+    "website": "test email func",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T14:47:01.106Z"
+  },
+  {
+    "website": "test email func",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T14:47:11.025Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T14:55:57.535Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T14:59:53.276Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T15:08:35.762Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T15:09:55.548Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "IN",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 126249.4116484883,
+        "clicks": 144.400346328396,
+        "conversions": 0.5776013853135841
+      },
+      "totals": {
+        "impressions": {
+          "min": 9089957.638691157,
+          "base": 11362447.048363946,
+          "max": 13634936.458036736
+        },
+        "clicks": {
+          "min": 10396.824935644514,
+          "base": 12996.031169555641,
+          "max": 15595.237403466768
+        },
+        "conversions": {
+          "min": 41.587299742578054,
+          "base": 51.984124678222564,
+          "max": 62.380949613867074
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0011437704496433197,
+      "CVR": 0.004,
+      "CPM": 3.960414495967173,
+      "CPC": 3.462595573440644
+    },
+    "createdAt": "2025-09-07T15:10:20.798Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "IN",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 126249.4116484883,
+        "clicks": 144.400346328396,
+        "conversions": 0.5776013853135841
+      },
+      "totals": {
+        "impressions": {
+          "min": 9089957.638691157,
+          "base": 11362447.048363946,
+          "max": 13634936.458036736
+        },
+        "clicks": {
+          "min": 10396.824935644514,
+          "base": 12996.031169555641,
+          "max": 15595.237403466768
+        },
+        "conversions": {
+          "min": 41.587299742578054,
+          "base": 51.984124678222564,
+          "max": 62.380949613867074
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0011437704496433197,
+      "CVR": 0.004,
+      "CPM": 3.960414495967173,
+      "CPC": 3.462595573440644
+    },
+    "createdAt": "2025-09-07T15:10:38.070Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "IN",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 126249.4116484883,
+        "clicks": 144.400346328396,
+        "conversions": 0.5776013853135841
+      },
+      "totals": {
+        "impressions": {
+          "min": 9089957.638691157,
+          "base": 11362447.048363946,
+          "max": 13634936.458036736
+        },
+        "clicks": {
+          "min": 10396.824935644514,
+          "base": 12996.031169555641,
+          "max": 15595.237403466768
+        },
+        "conversions": {
+          "min": 41.587299742578054,
+          "base": 51.984124678222564,
+          "max": 62.380949613867074
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0011437704496433197,
+      "CVR": 0.004,
+      "CPM": 3.960414495967173,
+      "CPC": 3.462595573440644
+    },
+    "createdAt": "2025-09-07T15:10:58.218Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "IN",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 126249.4116484883,
+        "clicks": 144.400346328396,
+        "conversions": 0.5776013853135841
+      },
+      "totals": {
+        "impressions": {
+          "min": 9089957.638691157,
+          "base": 11362447.048363946,
+          "max": 13634936.458036736
+        },
+        "clicks": {
+          "min": 10396.824935644514,
+          "base": 12996.031169555641,
+          "max": 15595.237403466768
+        },
+        "conversions": {
+          "min": 41.587299742578054,
+          "base": 51.984124678222564,
+          "max": 62.380949613867074
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0011437704496433197,
+      "CVR": 0.004,
+      "CPM": 3.960414495967173,
+      "CPC": 3.462595573440644
+    },
+    "createdAt": "2025-09-07T15:12:42.915Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "IN",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 126249.4116484883,
+        "clicks": 144.400346328396,
+        "conversions": 0.5776013853135841
+      },
+      "totals": {
+        "impressions": {
+          "min": 9089957.638691157,
+          "base": 11362447.048363946,
+          "max": 13634936.458036736
+        },
+        "clicks": {
+          "min": 10396.824935644514,
+          "base": 12996.031169555641,
+          "max": 15595.237403466768
+        },
+        "conversions": {
+          "min": 41.587299742578054,
+          "base": 51.984124678222564,
+          "max": 62.380949613867074
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0011437704496433197,
+      "CVR": 0.004,
+      "CPM": 3.960414495967173,
+      "CPC": 3.462595573440644
+    },
+    "createdAt": "2025-09-07T15:16:02.696Z"
+  },
+  {
+    "website": "Testemailfunc",
+    "email": "emailtest@gmail.com",
+    "country": "IN",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 126249.4116484883,
+        "clicks": 144.400346328396,
+        "conversions": 0.5776013853135841
+      },
+      "totals": {
+        "impressions": {
+          "min": 9089957.638691157,
+          "base": 11362447.048363946,
+          "max": 13634936.458036736
+        },
+        "clicks": {
+          "min": 10396.824935644514,
+          "base": 12996.031169555641,
+          "max": 15595.237403466768
+        },
+        "conversions": {
+          "min": 41.587299742578054,
+          "base": 51.984124678222564,
+          "max": 62.380949613867074
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0011437704496433197,
+      "CVR": 0.004,
+      "CPM": 3.960414495967173,
+      "CPC": 3.462595573440644
+    },
+    "createdAt": "2025-09-07T15:17:13.158Z"
+  },
+  {
+    "website": "Test ",
+    "email": "chinemeremokpara93@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T15:21:22.647Z"
+  },
+  {
+    "website": "Test ",
+    "email": "chinemeremokpara93@gmail.com",
+    "country": "JP",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 1231541.3620776255,
+        "clicks": 632.2292846328128,
+        "conversions": 2.528917138531251
+      },
+      "totals": {
+        "impressions": {
+          "min": 88670978.06958903,
+          "base": 110838722.58698629,
+          "max": 133006467.10438354
+        },
+        "clicks": {
+          "min": 45520.50849356252,
+          "base": 56900.63561695315,
+          "max": 68280.76274034378
+        },
+        "conversions": {
+          "min": 182.0820339742501,
+          "base": 227.6025424678126,
+          "max": 273.1230509613751
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0005133642312802505,
+      "CVR": 0.004,
+      "CPM": 0.40599529613564406,
+      "CPC": 0.7908523254983211
+    },
+    "createdAt": "2025-09-07T15:25:58.473Z"
+  },
+  {
+    "website": "test",
+    "email": "chinemeremokpara93@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-07T15:28:18.528Z"
+  },
+  {
+    "website": "test",
+    "email": "chinemeremokpara93@gmail.com",
+    "country": "PT",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 743989.487215609,
+        "clicks": 443.3154891878566,
+        "conversions": 1.7732619567514265
+      },
+      "totals": {
+        "impressions": {
+          "min": 53567243.079523854,
+          "base": 66959053.84940481,
+          "max": 80350864.61928578
+        },
+        "clicks": {
+          "min": 31918.71522152568,
+          "base": 39898.394026907095,
+          "max": 47878.07283228851
+        },
+        "conversions": {
+          "min": 127.67486088610272,
+          "base": 159.5935761076284,
+          "max": 191.51229132915407
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0005958625717239245,
+      "CVR": 0.004,
+      "CPM": 0.672052506912775,
+      "CPC": 1.1278649453823237
+    },
+    "createdAt": "2025-09-07T15:28:57.861Z"
+  },
+  {
+    "website": "test",
+    "email": "Testing@gmail.com",
+    "country": "PT",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 743989.487215609,
+        "clicks": 443.3154891878566,
+        "conversions": 1.7732619567514265
+      },
+      "totals": {
+        "impressions": {
+          "min": 53567243.079523854,
+          "base": 66959053.84940481,
+          "max": 80350864.61928578
+        },
+        "clicks": {
+          "min": 31918.71522152568,
+          "base": 39898.394026907095,
+          "max": 47878.07283228851
+        },
+        "conversions": {
+          "min": 127.67486088610272,
+          "base": 159.5935761076284,
+          "max": 191.51229132915407
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0005958625717239245,
+      "CVR": 0.004,
+      "CPM": 0.672052506912775,
+      "CPC": 1.1278649453823237
+    },
+    "createdAt": "2025-09-07T15:39:27.759Z"
+  }
+]

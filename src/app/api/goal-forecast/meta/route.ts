@@ -6,23 +6,17 @@ function getCountryLabel(code: string): string {
 }
 
 export async function GET() {
-  const bench = await loadBenchmarks();
+  const categories = ["iGaming", "Finance"];
 
-  const pairs = Object.keys(bench).map((k) => {
-    const [category, iso2] = k.split("|");
-    return {
-      category,
-      country: {
-        label: `${getCountryLabel(iso2)} (${iso2})`,
-        value: iso2,
-      },
-    };
-  });
+  const all = await loadBenchmarks();
+  const uniqueCountries = new Set(
+    Object.keys(all).map((key) => key.split("|")[1])
+  );
 
-  const categories = Array.from(new Set(pairs.map((p) => p.category))).sort();
-  const countries = Array.from(
-    new Map(pairs.map((p) => [p.country.value, p.country])).values()
-  ).sort((a, b) => a.label.localeCompare(b.label));
+  const countries = Array.from(uniqueCountries).map((code) => ({
+    label: `${getCountryLabel(code)} (${code})`,
+    value: code,
+  }));
 
-  return NextResponse.json({ categories, countries, pairs });
+  return NextResponse.json({ categories, countries });
 }

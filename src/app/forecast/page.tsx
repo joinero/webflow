@@ -33,7 +33,6 @@ export default function ForecastsPage() {
   const [forecasts, setForecasts] = useState<Forecast[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Protect page
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {

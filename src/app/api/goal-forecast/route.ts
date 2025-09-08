@@ -85,7 +85,7 @@ function getCountryName(code: string): string {
     const display = new Intl.DisplayNames(["en"], { type: "region" });
     return display.of(code) || code;
   } catch {
-    return code; // fallback if something goes wrong
+    return code; 
   }
 }
 

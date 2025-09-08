@@ -48,7 +48,6 @@ export default function CalculatorPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [countries, setCountries] = useState<Country[]>([]);
 
-  // Fetch countries on mount
   useEffect(() => {
     async function fetchCountries() {
       try {

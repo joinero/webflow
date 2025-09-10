@@ -31,15 +31,6 @@ if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-function readData() {
-  if (!fs.existsSync(dataFile)) return [];
-  return JSON.parse(fs.readFileSync(dataFile, "utf-8"));
-}
-
-function writeData(data: any) {
-  fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
-}
-
 function withTotals(impDay: number, clkDay: number, convDay: number, D: number) {
   const bump = (v: number, p: number) => ({
     min: v * (1 - p),
@@ -54,6 +45,26 @@ function withTotals(impDay: number, clkDay: number, convDay: number, D: number) 
       conversions: bump(convDay * D, 0.2),
     },
   };
+}
+
+type ForecastEntry = InputType & {
+  results: ReturnType<typeof withTotals>;
+  rates: {
+    CTR: number;
+    CVR: number;
+    CPM: number;
+    CPC: number;
+  };
+  createdAt: string;
+};
+
+function readData(): ForecastEntry[] {
+  if (!fs.existsSync(dataFile)) return [];
+  return JSON.parse(fs.readFileSync(dataFile, "utf-8")) as ForecastEntry[];
+}
+
+function writeData(data: ForecastEntry[]) {
+  fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
 }
 
 async function getCountriesFromCSV() {
@@ -85,11 +96,11 @@ function getCountryName(code: string): string {
     const display = new Intl.DisplayNames(["en"], { type: "region" });
     return display.of(code) || code;
   } catch {
-    return code; 
+    return code;
   }
 }
 
-async function sendForecastEmail(details: any) {
+async function sendForecastEmail(details: ForecastEntry) {
   const countryName = getCountryName(details.country);
   const html = `
     <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #000; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
@@ -185,7 +196,9 @@ export async function POST(req: NextRequest) {
     const B = i.dailyBudget;
     const D = i.durationDays;
 
-    let impDay = 0, clkDay = 0, convDay = 0;
+    let impDay = 0,
+      clkDay = 0,
+      convDay = 0;
 
     if (i.mode === "CPM") {
       impDay = (B / CPM) * 1000;
@@ -204,7 +217,12 @@ export async function POST(req: NextRequest) {
 
     // Save locally
     const prev = readData();
-    const entry = { ...i, results, rates, createdAt: new Date().toISOString() };
+    const entry: ForecastEntry = {
+      ...i,
+      results,
+      rates,
+      createdAt: new Date().toISOString(),
+    };
     prev.push(entry);
     writeData(prev);
 

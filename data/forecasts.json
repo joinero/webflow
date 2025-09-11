@@ -1552,5 +1552,89 @@
       "CPC": 1.1278649453823237
     },
     "createdAt": "2025-09-07T15:39:27.759Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-10T15:13:08.911Z"
+  },
+  {
+    "website": "Test Website",
+    "email": "test@gmail.com",
+    "country": "US",
+    "category": "iGaming",
+    "mode": "CPM",
+    "dailyBudget": 500,
+    "durationDays": 90,
+    "monthlyConversionsAvg": 1000,
+    "monthlyUniqueUsersAvg": 250000,
+    "results": {
+      "daily": {
+        "impressions": 116175.58251753975,
+        "clicks": 88.99889282450245,
+        "conversions": 0.3559955712980098
+      },
+      "totals": {
+        "impressions": {
+          "min": 8364641.941262863,
+          "base": 10455802.426578578,
+          "max": 12546962.911894294
+        },
+        "clicks": {
+          "min": 6407.920283364177,
+          "base": 8009.9003542052205,
+          "max": 9611.880425046264
+        },
+        "conversions": {
+          "min": 25.631681133456706,
+          "base": 32.03960141682088,
+          "max": 38.44752170018506
+        }
+      }
+    },
+    "rates": {
+      "CTR": 0.0007660722752224267,
+      "CVR": 0.004,
+      "CPM": 4.303830367491481,
+      "CPC": 5.6180474175780315
+    },
+    "createdAt": "2025-09-10T15:13:18.454Z"
   }
 ]

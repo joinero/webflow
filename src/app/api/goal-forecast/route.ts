@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
 import Papa from "papaparse";
+import path from "path";
+import fs from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import { z, ZodError } from "zod";
 import { getBench } from "@/lib/benchmarks";
@@ -23,13 +23,6 @@ const InputSchema = z.object({
 });
 
 type InputType = z.infer<typeof InputSchema>;
-
-const dataDir = path.join(process.cwd(), "data");
-const dataFile = path.join(dataDir, "forecasts.json");
-
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
 
 function withTotals(impDay: number, clkDay: number, convDay: number, D: number) {
   const bump = (v: number, p: number) => ({
@@ -57,15 +50,6 @@ type ForecastEntry = InputType & {
   };
   createdAt: string;
 };
-
-function readData(): ForecastEntry[] {
-  if (!fs.existsSync(dataFile)) return [];
-  return JSON.parse(fs.readFileSync(dataFile, "utf-8")) as ForecastEntry[];
-}
-
-function writeData(data: ForecastEntry[]) {
-  fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
-}
 
 async function getCountriesFromCSV() {
   const csvPath = path.join(process.cwd(), "src/data", "locations-USD_all_time.csv");
@@ -105,48 +89,28 @@ async function sendForecastEmail(details: ForecastEntry) {
   const html = `
     <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #000; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
       <h2 style="color:#000; margin-bottom: 8px;">Forecast Results</h2>
-      <p style="color:#000;"><b>Website:</b> ${details.website}</p>
-      <p style="color:#000;"><b>Email Provided:</b> <span style="color:#000;">${details.email}</span></p>
-      <p style="color:#000;"><b>Country:</b> ${countryName}</p>
-      <p style="color:#000;"><b>Category:</b> ${details.category}</p>
-      <p style="color:#000;"><b>Mode:</b> ${details.mode}</p>
-      <p style="color:#000;"><b>Daily Budget:</b> $${details.dailyBudget}</p>
-      <p style="color:#000;"><b>Duration:</b> ${details.durationDays} days</p>
-
+      <p><b>Website:</b> ${details.website}</p>
+      <p><b>Email Provided:</b> ${details.email}</p>
+      <p><b>Country:</b> ${countryName}</p>
+      <p><b>Category:</b> ${details.category}</p>
+      <p><b>Mode:</b> ${details.mode}</p>
+      <p><b>Daily Budget:</b> $${details.dailyBudget}</p>
+      <p><b>Duration:</b> ${details.durationDays} days</p>
       <hr style="margin:20px 0; border: 1px solid #ddd;"/>
-
-      <h3 style="color:#000; margin-bottom: 8px;">📊 Rates</h3>
-      <table style="width:100%; border-collapse: collapse; margin-bottom: 20px; color:#000;">
-        <thead>
-          <tr>
-            <th style="text-align:left; border-bottom:2px solid #ddd; padding: 8px; color:#000;">Metric</th>
-            <th style="text-align:left; border-bottom:2px solid #ddd; padding: 8px; color:#000;">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td style="padding: 8px; color:#000;">CTR</td><td style="padding: 8px; color:#000;">${(details.rates.CTR * 100).toFixed(2)}%</td></tr>
-          <tr><td style="padding: 8px; color:#000;">CVR</td><td style="padding: 8px; color:#000;">${(details.rates.CVR * 100).toFixed(2)}%</td></tr>
-          <tr><td style="padding: 8px; color:#000;">CPM</td><td style="padding: 8px; color:#000;">$${details.rates.CPM.toFixed(2)}</td></tr>
-          <tr><td style="padding: 8px; color:#000;">CPC</td><td style="padding: 8px; color:#000;">$${details.rates.CPC.toFixed(2)}</td></tr>
-        </tbody>
-      </table>
-
-      <h3 style="color:#000; margin-bottom: 8px;">📈 Totals (Estimates)</h3>
-      <table style="width:100%; border-collapse: collapse; margin-bottom: 20px; color:#000;">
-        <thead>
-          <tr>
-            <th style="text-align:left; border-bottom:2px solid #ddd; padding: 8px; color:#000;">Metric</th>
-            <th style="text-align:left; border-bottom:2px solid #ddd; padding: 8px; color:#000;">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td style="padding: 8px; color:#000;">Impressions</td><td style="padding: 8px; color:#000;">${details.results.totals.impressions.base.toLocaleString()}</td></tr>
-          <tr><td style="padding: 8px; color:#000;">Clicks</td><td style="padding: 8px; color:#000;">${details.results.totals.clicks.base.toLocaleString()}</td></tr>
-          <tr><td style="padding: 8px; color:#000;">Conversions</td><td style="padding: 8px; color:#000;">${details.results.totals.conversions.base.toLocaleString()}</td></tr>
-        </tbody>
-      </table>
-
-      <p style="margin-top:16px; font-size: 13px; color:#000;">
+      <h3>📊 Rates</h3>
+      <ul>
+        <li>CTR: ${(details.rates.CTR * 100).toFixed(2)}%</li>
+        <li>CVR: ${(details.rates.CVR * 100).toFixed(2)}%</li>
+        <li>CPM: $${details.rates.CPM.toFixed(2)}</li>
+        <li>CPC: $${details.rates.CPC.toFixed(2)}</li>
+      </ul>
+      <h3>📈 Totals (Estimates)</h3>
+      <ul>
+        <li>Impressions: ${details.results.totals.impressions.base.toLocaleString()}</li>
+        <li>Clicks: ${details.results.totals.clicks.base.toLocaleString()}</li>
+        <li>Conversions: ${details.results.totals.conversions.base.toLocaleString()}</li>
+      </ul>
+      <p style="margin-top:16px; font-size: 13px;">
         ⚠️ Estimates are based on benchmarks and inputs. Actual results may vary.
       </p>
     </div>
@@ -167,11 +131,9 @@ async function sendForecastEmail(details: ForecastEntry) {
 }
 
 export async function GET() {
-  const forecasts = readData();
   const categories = ["iGaming", "Finance"];
   const countries = await getCountriesFromCSV();
-
-  return NextResponse.json({ ok: true, forecasts, categories, countries });
+  return NextResponse.json({ ok: true, categories, countries });
 }
 
 export async function POST(req: NextRequest) {
@@ -185,7 +147,6 @@ export async function POST(req: NextRequest) {
       monthlyUniqueUsersAvg: Number(raw.monthlyUniqueUsersAvg),
     });
 
-    // get benchmarks
     const bench = await getBench(i.category, i.country);
 
     const CVR = i.monthlyConversionsAvg / i.monthlyUniqueUsersAvg;
@@ -196,17 +157,12 @@ export async function POST(req: NextRequest) {
     const B = i.dailyBudget;
     const D = i.durationDays;
 
-    let impDay = 0,
-      clkDay = 0,
-      convDay = 0;
-
+    let impDay = 0, clkDay = 0, convDay = 0;
     if (i.mode === "CPM") {
       impDay = (B / CPM) * 1000;
       clkDay = impDay * CTR;
       convDay = clkDay * CVR;
-    }
-
-    if (i.mode === "CPC") {
+    } else if (i.mode === "CPC") {
       clkDay = B / CPC;
       impDay = clkDay / CTR;
       convDay = clkDay * CVR;
@@ -214,26 +170,11 @@ export async function POST(req: NextRequest) {
 
     const results = withTotals(impDay, clkDay, convDay, D);
     const rates = { CTR, CVR, CPM, CPC };
-
-    // Save locally
-    const prev = readData();
-    const entry: ForecastEntry = {
-      ...i,
-      results,
-      rates,
-      createdAt: new Date().toISOString(),
-    };
-    prev.push(entry);
-    writeData(prev);
+    const entry: ForecastEntry = { ...i, results, rates, createdAt: new Date().toISOString() };
 
     await sendForecastEmail(entry);
 
-    return NextResponse.json({
-      ok: true,
-      inputs: i,
-      rates,
-      ...results,
-    });
+    return NextResponse.json({ ok: true, inputs: i, rates, ...results });
   } catch (err) {
     if (err instanceof ZodError) {
       const errors: Record<string, string> = {};

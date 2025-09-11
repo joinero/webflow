@@ -37,10 +37,10 @@ export default function CalculatorPage() {
   const [email, setEmail] = useState('');
   const [category, setCategory] = useState<'iGaming' | 'Finance'>('iGaming');
   const [country, setCountry] = useState('US');
-  const [dailyBudget, setB] = useState(500);
-  const [days, setDays] = useState(90);
-  const [mConv, setMConv] = useState(1000);
-  const [mUsers, setMUsers] = useState(250000);
+  const [dailyBudget, setB] = useState('');
+  const [days, setDays] = useState('');
+  const [mConv, setMConv] = useState('');
+  const [mUsers, setMUsers] = useState('');
   const [mode, setMode] = useState<Mode>('CPM');
 
   const [loading, setLoading] = useState(false);
@@ -188,7 +188,7 @@ export default function CalculatorPage() {
               className="calc-input"
               type="number"
               value={dailyBudget}
-              onChange={(e) => setB(+e.target.value)}
+              onChange={(e) => setB(e.target.value)}
             />
             {errors.dailyBudget && <div className="error-text">{errors.dailyBudget}</div>}
           </div>
@@ -200,7 +200,7 @@ export default function CalculatorPage() {
               className="calc-input"
               type="number"
               value={days}
-              onChange={(e) => setDays(+e.target.value)}
+              onChange={(e) => setDays(e.target.value)}
             />
             {errors.durationDays && <div className="error-text">{errors.durationDays}</div>}
           </div>
@@ -212,7 +212,7 @@ export default function CalculatorPage() {
               className="calc-input"
               type="number"
               value={mConv}
-              onChange={(e) => setMConv(+e.target.value)}
+              onChange={(e) => setMConv(e.target.value)}
             />
             {errors.monthlyConversionsAvg && (
               <div className="error-text">{errors.monthlyConversionsAvg}</div>
@@ -226,7 +226,7 @@ export default function CalculatorPage() {
               className="calc-input"
               type="number"
               value={mUsers}
-              onChange={(e) => setMUsers(+e.target.value)}
+              onChange={(e) => setMUsers(e.target.value)}
             />
             {errors.monthlyUniqueUsersAvg && (
               <div className="error-text">{errors.monthlyUniqueUsersAvg}</div>
@@ -270,15 +270,15 @@ export default function CalculatorPage() {
             <div className="result" style={{ marginTop: 12 }}>
               <div className="box">
                 <div className="k">Impressions</div>
-                <div className="v">{(resp.totals.impressions.base.toFixed(0))}</div>
+                <div className="v">{resp.totals.impressions.base.toFixed(0)}</div>
               </div>
               <div className="box">
                 <div className="k">Clicks</div>
-                <div className="v">{(resp.totals.clicks.base.toFixed(0))}</div>
+                <div className="v">{resp.totals.clicks.base.toFixed(0)}</div>
               </div>
               <div className="box">
                 <div className="k">Conversions</div>
-                <div className="v">{(resp.totals.conversions.base.toFixed(0))}</div>
+                <div className="v">{resp.totals.conversions.base.toFixed(0)}</div>
               </div>
             </div>
             <div style={{ marginTop: 8, color: '#475569' }}>

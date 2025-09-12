@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { message } from 'antd';
 
-type Mode = 'CPM' | 'CPC';
-
 interface Country {
   label: string;
   value: string;
@@ -41,7 +39,6 @@ export default function CalculatorPage() {
   const [days, setDays] = useState('');
   const [mConv, setMConv] = useState('');
   const [mUsers, setMUsers] = useState('');
-  const [mode, setMode] = useState<Mode>('CPM');
 
   const [loading, setLoading] = useState(false);
   const [resp, setResp] = useState<ForecastResp | null>(null);
@@ -54,7 +51,11 @@ export default function CalculatorPage() {
         const r = await fetch('/api/goal-forecast');
         const data = await r.json();
         if (data.countries) {
-          setCountries(data.countries);
+          // Sort alphabetically by label
+          const sorted = data.countries.sort((a: Country, b: Country) =>
+            a.label.localeCompare(b.label)
+          );
+          setCountries(sorted);
         }
       } catch (err) {
         console.error('Failed to fetch countries', err);
@@ -75,7 +76,7 @@ export default function CalculatorPage() {
           email,
           category,
           country,
-          mode,
+          mode: "CPM",
           dailyBudget: Number(dailyBudget),
           durationDays: Number(days),
           monthlyConversionsAvg: Number(mConv),
@@ -108,25 +109,7 @@ export default function CalculatorPage() {
       <div className="calc-card">
         <h1 className="calc-title">Goal forecast</h1>
 
-        {/* Mode Tabs */}
-        <div className="calc-actions" style={{ marginTop: 0 }}>
-          {(['CPM', 'CPC'] as Mode[]).map((m) => (
-            <button
-              key={m}
-              className="calc-btn"
-              style={{
-                background: mode === m ? 'var(--accent)' : '#e5e7eb',
-                color: mode === m ? '#fff' : '#111',
-              }}
-              onClick={() => setMode(m)}
-            >
-              {m}
-            </button>
-          ))}
-        </div>
-
         <div className="calc-grid" style={{ marginTop: 16 }}>
-          {/* Website */}
           <div className="calc-field">
             <label>Website</label>
             <input
@@ -138,7 +121,6 @@ export default function CalculatorPage() {
             {errors.website && <div className="error-text">{errors.website}</div>}
           </div>
 
-          {/* Email */}
           <div className="calc-field">
             <label>Email</label>
             <input
@@ -150,7 +132,6 @@ export default function CalculatorPage() {
             {errors.email && <div className="error-text">{errors.email}</div>}
           </div>
 
-          {/* Category */}
           <div className="calc-field">
             <label>Category</label>
             <select
@@ -164,7 +145,6 @@ export default function CalculatorPage() {
             {errors.category && <div className="error-text">{errors.category}</div>}
           </div>
 
-          {/* Country */}
           <div className="calc-field">
             <label>Country</label>
             <select
@@ -181,7 +161,6 @@ export default function CalculatorPage() {
             {errors.country && <div className="error-text">{errors.country}</div>}
           </div>
 
-          {/* Daily Budget */}
           <div className="calc-field">
             <label>Daily budget (USD)</label>
             <input
@@ -193,7 +172,6 @@ export default function CalculatorPage() {
             {errors.dailyBudget && <div className="error-text">{errors.dailyBudget}</div>}
           </div>
 
-          {/* Duration */}
           <div className="calc-field">
             <label>Duration (days)</label>
             <input
@@ -205,7 +183,6 @@ export default function CalculatorPage() {
             {errors.durationDays && <div className="error-text">{errors.durationDays}</div>}
           </div>
 
-          {/* Monthly conversions */}
           <div className="calc-field">
             <label>Monthly conversions (avg)</label>
             <input
@@ -219,7 +196,6 @@ export default function CalculatorPage() {
             )}
           </div>
 
-          {/* Monthly users */}
           <div className="calc-field">
             <label>Monthly unique users (avg)</label>
             <input
@@ -240,23 +216,18 @@ export default function CalculatorPage() {
           </button>
         </div>
 
-        {/* Results */}
         {resp?.ok && resp.totals && (
           <>
             {resp.rates && (
               <div className="result" style={{ marginTop: 12 }}>
-                {mode === 'CPM' && (
-                  <div className="box">
-                    <div className="k">CPM</div>
-                    <div className="v">{resp.rates.CPM.toFixed(2)}</div>
-                  </div>
-                )}
-                {mode === 'CPC' && (
-                  <div className="box">
-                    <div className="k">CPC</div>
-                    <div className="v">{resp.rates.CPC.toFixed(2)}</div>
-                  </div>
-                )}
+                <div className="box">
+                  <div className="k">CPM</div>
+                  <div className="v">{resp.rates.CPM.toFixed(2)}</div>
+                </div>
+                <div className="box">
+                  <div className="k">CPC</div>
+                  <div className="v">{resp.rates.CPC.toFixed(2)}</div>
+                </div>
                 <div className="box">
                   <div className="k">CTR</div>
                   <div className="v">{(resp.rates.CTR * 100).toFixed(2)}%</div>

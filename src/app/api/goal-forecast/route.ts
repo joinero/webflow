@@ -93,7 +93,6 @@ async function sendForecastEmail(details: ForecastEntry) {
       <p><b>Email Provided:</b> ${details.email}</p>
       <p><b>Country:</b> ${countryName}</p>
       <p><b>Category:</b> ${details.category}</p>
-      <p><b>Mode:</b> ${details.mode}</p>
       <p><b>Daily Budget:</b> $${details.dailyBudget}</p>
       <p><b>Duration:</b> ${details.durationDays} days</p>
       <hr style="margin:20px 0; border: 1px solid #ddd;"/>

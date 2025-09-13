@@ -116,8 +116,8 @@ async function sendForecastEmail(details: ForecastEntry) {
   `;
 
   const result = await resend.emails.send({
-    from: "Forecast Tool <onboarding@resend.dev>",
-    to: "chinemeremokpara93@gmail.com",
+    from: "Joinero Forecast <sales@joinero.co>",
+    to: "sales@joinero.co",
     subject: `Forecast Results for ${details.website}`,
     html,
   });

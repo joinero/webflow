@@ -1,7 +1,7 @@
 {
-  "cosmic": {
-    "framework": "next",
-    "mountPath": "/calculator",
-    "buildCommand": "npm run build"
-  }
-}
+       "cloud": {
+         "framework": "nextjs",
+         "mountPath": "/calculator",
+         "buildCommand": "npm run build"
+       }
+     }

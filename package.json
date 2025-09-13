@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.6.5",
     "antd": "^5.27.2",
     "cookie": "^1.0.2",
     "jose": "^6.1.0",

@@ -73,8 +73,6 @@ async function getCountriesFromCSV() {
     }));
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function getCountryName(code: string): string {
   try {
     const display = new Intl.DisplayNames(["en"], { type: "region" });
@@ -84,7 +82,7 @@ function getCountryName(code: string): string {
   }
 }
 
-async function sendForecastEmail(details: ForecastEntry) {
+async function sendForecastEmail(resend: Resend, details: ForecastEntry) {
   const countryName = getCountryName(details.country);
   const html = `
     <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #000; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
@@ -171,7 +169,12 @@ export async function POST(req: NextRequest) {
     const rates = { CTR, CVR, CPM, CPC };
     const entry: ForecastEntry = { ...i, results, rates, createdAt: new Date().toISOString() };
 
-    await sendForecastEmail(entry);
+    // Initialize Resend here, only when needed
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error("Missing Resend API key");
+    }
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await sendForecastEmail(resend, entry);
 
     return NextResponse.json({ ok: true, inputs: i, rates, ...results });
   } catch (err) {

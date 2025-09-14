@@ -45,13 +45,15 @@ export default function CalculatorPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [countries, setCountries] = useState<Country[]>([]);
 
+  const VERCEL_API = 'https://webflow-kappa.vercel.app/api/goal-forecast';
+
+  // Fetch countries from Vercel API
   useEffect(() => {
     async function fetchCountries() {
       try {
-        const r = await fetch('/api/goal-forecast');
+        const r = await fetch(VERCEL_API, { method: 'GET' });
         const data = await r.json();
         if (data.countries) {
-          // Sort alphabetically by label
           const sorted = data.countries.sort((a: Country, b: Country) =>
             a.label.localeCompare(b.label)
           );
@@ -59,24 +61,26 @@ export default function CalculatorPage() {
         }
       } catch (err) {
         console.error('Failed to fetch countries', err);
+        message.error('Failed to load countries. Please try again.');
       }
     }
     fetchCountries();
   }, []);
 
+  // Run forecast
   async function run() {
     setLoading(true);
     setErrors({});
     try {
-      const r = await fetch('/api/goal-forecast', {
+      const r = await fetch(VERCEL_API, {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           website,
           email,
           category,
           country,
-          mode: "CPM",
+          mode: 'CPM',
           dailyBudget: Number(dailyBudget),
           durationDays: Number(days),
           monthlyConversionsAvg: Number(mConv),
@@ -87,11 +91,8 @@ export default function CalculatorPage() {
       const j: ForecastResp = await r.json();
 
       if (!r.ok || !j.ok) {
-        if (j.errors) {
-          setErrors(j.errors);
-        } else {
-          message.error(j.error || 'Invalid input, please check your details');
-        }
+        if (j.errors) setErrors(j.errors);
+        else message.error(j.error || 'Invalid input, please check your details');
         return;
       }
 

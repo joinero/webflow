@@ -6,8 +6,7 @@ import { z, ZodError } from "zod";
 import { getBench } from "@/lib/benchmarks";
 import { Resend } from "resend";
 
-// Define allowed origins (update with your Webflow domain for production)
-const allowedOrigins = ['http://localhost:3000', 'https://joinero.webflow.io', 'https://joinero.co']; // Include localhost for dev, Webflow for prod
+const allowedOrigins = ['http://localhost:3000', 'https://joinero.webflow.io', 'https://joinero.co']; 
 
 const InputSchema = z.object({
   website: z.string().min(2, "Website name must be at least 2 characters"),

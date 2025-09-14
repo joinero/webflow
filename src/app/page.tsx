@@ -22,7 +22,6 @@ export default function CalculatorPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [countries, setCountries] = useState<Country[]>([]);
 
-  // Use proxy for local dev, direct URL for Webflow
   const API_URL = process.env.NODE_ENV === 'development' ? '/api/proxy-goal-forecast' : 'https://webflow-kappa.vercel.app/api/goal-forecast';
 
   useEffect(() => {

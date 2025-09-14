@@ -48,7 +48,6 @@ export async function loadBenchmarks(): Promise<Record<string, BenchData>> {
     const cpc = parseFloat(row["cpc"]);
     const cpa = parseFloat(row["cpa"]);
 
-    // Key will just be "ALL|<country_code>" since we don’t have brand/category in this CSV
     const key = `ALL|${code}`;
 
     bench[key] = {
@@ -66,6 +65,5 @@ export async function loadBenchmarks(): Promise<Record<string, BenchData>> {
 export async function getBench(category: string, iso2: string): Promise<BenchData> {
   const all = await loadBenchmarks();
 
-  // Try to fetch with ALL|<country_code>
   return all[`ALL|${iso2}`] ?? DEFAULTS;
 }

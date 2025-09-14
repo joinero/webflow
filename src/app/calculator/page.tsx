@@ -51,7 +51,6 @@ export default function CalculatorPage() {
         const r = await fetch('/api/goal-forecast');
         const data = await r.json();
         if (data.countries) {
-          // Sort alphabetically by label
           const sorted = data.countries.sort((a: Country, b: Country) =>
             a.label.localeCompare(b.label)
           );

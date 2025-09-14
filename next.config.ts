@@ -6,8 +6,12 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/calculator/:path*',  
-        destination: '/:path*', 
+        source: '/calculator/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/api/proxy-goal-forecast',
+        destination: 'https://webflow-kappa.vercel.app/api/goal-forecast',
       },
     ];
   },

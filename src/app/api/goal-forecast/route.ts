@@ -6,6 +6,9 @@ import { z, ZodError } from "zod";
 import { getBench } from "@/lib/benchmarks";
 import { Resend } from "resend";
 
+// Define allowed origins (update with your Webflow domain for production)
+const allowedOrigins = ['http://localhost:3000', 'https://joinero.webflow.io', 'https://joinero.co']; // Include localhost for dev, Webflow for prod
+
 const InputSchema = z.object({
   website: z.string().min(2, "Website name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
@@ -53,18 +56,15 @@ type ForecastEntry = InputType & {
 
 async function getCountriesFromCSV() {
   const csvPath = path.join(process.cwd(), "src/data", "locations-USD_all_time.csv");
-
   if (!fs.existsSync(csvPath)) {
     console.warn("⚠️ CSV file not found:", csvPath);
     return [];
   }
-
   const content = fs.readFileSync(csvPath, "utf8");
   const parsed = Papa.parse<Record<string, string>>(content, {
     header: true,
     skipEmptyLines: true,
   }).data;
-
   return parsed
     .filter((row) => row.country_code && row.country_name)
     .map((row) => ({
@@ -112,14 +112,12 @@ async function sendForecastEmail(resend: Resend, details: ForecastEntry) {
       </p>
     </div>
   `;
-
   const result = await resend.emails.send({
     from: "Joinero Forecast <sales@joinero.co>",
     to: "sales@joinero.co",
     subject: `Forecast Results for ${details.website}`,
     html,
   });
-
   if (result.error) {
     console.error("❌ Resend error:", result.error.message);
   } else {
@@ -127,13 +125,30 @@ async function sendForecastEmail(resend: Resend, details: ForecastEntry) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const origin = req.headers.get('origin');
+  const headers = {
+    'Access-Control-Allow-Origin': origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   const categories = ["iGaming", "Finance"];
   const countries = await getCountriesFromCSV();
-  return NextResponse.json({ ok: true, categories, countries });
+  return new NextResponse(JSON.stringify({ ok: true, categories, countries }), {
+    status: 200,
+    headers: headers,
+  });
 }
 
 export async function POST(req: NextRequest) {
+  const origin = req.headers.get('origin');
+  const headers = {
+    'Access-Control-Allow-Origin': origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   try {
     const raw = await req.json();
     const i: InputType = InputSchema.parse({
@@ -169,25 +184,40 @@ export async function POST(req: NextRequest) {
     const rates = { CTR, CVR, CPM, CPC };
     const entry: ForecastEntry = { ...i, results, rates, createdAt: new Date().toISOString() };
 
-    // Initialize Resend here, only when needed
     if (!process.env.RESEND_API_KEY) {
       throw new Error("Missing Resend API key");
     }
     const resend = new Resend(process.env.RESEND_API_KEY);
     await sendForecastEmail(resend, entry);
 
-    return NextResponse.json({ ok: true, inputs: i, rates, ...results });
+    return new NextResponse(JSON.stringify({ ok: true, inputs: i, rates, ...results }), {
+      status: 200,
+      headers: headers,
+    });
   } catch (err) {
     if (err instanceof ZodError) {
       const errors: Record<string, string> = {};
       err.issues.forEach((e) => {
         errors[e.path.join(".")] = e.message;
       });
-      return NextResponse.json({ ok: false, errors }, { status: 400 });
+      return new NextResponse(JSON.stringify({ ok: false, errors }), {
+        status: 400,
+        headers: headers,
+      });
     }
-    return NextResponse.json(
-      { ok: false, error: (err as Error).message ?? "Invalid input" },
-      { status: 400 }
-    );
+    return new NextResponse(JSON.stringify({ ok: false, error: (err as Error).message ?? "Invalid input" }), {
+      status: 400,
+      headers: headers,
+    });
   }
+}
+
+export async function OPTIONS(req: NextRequest) {
+  const origin = req.headers.get('origin');
+  const headers = {
+    'Access-Control-Allow-Origin': origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+  return new NextResponse(null, { status: 204, headers });
 }

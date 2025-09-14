@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/calculator/:path*',
-        destination: '/:path*',
+        source: '/calculator/:path*',  
+        destination: '/:path*', 
       },
       {
         source: '/api/proxy-goal-forecast',

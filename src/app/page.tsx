@@ -22,21 +22,26 @@ export default function CalculatorPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [countries, setCountries] = useState<Country[]>([]);
 
-  // ✅ Use the local proxy
-  const API_URL = '/api/proxy-goal-forecast';
+  // Use proxy for local dev, direct URL for Webflow
+  const API_URL = process.env.NODE_ENV === 'development' ? '/api/proxy-goal-forecast' : 'https://webflow-kappa.vercel.app/api/goal-forecast';
 
   useEffect(() => {
     async function fetchCountries() {
       try {
         const r = await fetch(API_URL);
+        if (!r.ok) throw new Error('Network response was not ok');
         const data = await r.json();
         if (data.countries) {
           const sorted = data.countries.sort((a: Country, b: Country) => a.label.localeCompare(b.label));
           setCountries(sorted);
+        } else {
+          setCountries([{ label: 'United States (US)', value: 'US' }]);
+          message.warning('Using fallback countries data.');
         }
       } catch (err) {
         console.error('Failed to fetch countries', err);
         message.error('Failed to load countries. Please try again.');
+        setCountries([{ label: 'United States (US)', value: 'US' }]);
       }
     }
     fetchCountries();
@@ -55,10 +60,10 @@ export default function CalculatorPage() {
           category,
           country,
           mode: 'CPM',
-          dailyBudget: Number(dailyBudget),
-          durationDays: Number(days),
-          monthlyConversionsAvg: Number(mConv),
-          monthlyUniqueUsersAvg: Number(mUsers),
+          dailyBudget: Number(dailyBudget) || 0,
+          durationDays: Number(days) || 0,
+          monthlyConversionsAvg: Number(mConv) || 0,
+          monthlyUniqueUsersAvg: Number(mUsers) || 0,
         }),
       });
 
@@ -84,7 +89,6 @@ export default function CalculatorPage() {
       <div className="calc-card">
         <h1 className="calc-title">Goal forecast</h1>
         <div className="calc-grid" style={{ marginTop: 16 }}>
-          {/* All input fields remain the same */}
           <div className="calc-field">
             <label>Website</label>
             <input className="calc-input" type="text" value={website} onChange={(e) => setWebsite(e.target.value)} />
@@ -131,21 +135,19 @@ export default function CalculatorPage() {
             {errors.monthlyUniqueUsersAvg && <div className="error-text">{errors.monthlyUniqueUsersAvg}</div>}
           </div>
         </div>
-
         <div className="calc-actions">
           <button className="calc-btn" onClick={run} disabled={loading}>
             {loading ? 'Calculating…' : 'Run forecast'}
           </button>
         </div>
-
         {resp?.ok && resp.totals && (
           <>
             {resp.rates && (
               <div className="result" style={{ marginTop: 12 }}>
                 <div className="box"><div className="k">CPM</div><div className="v">{resp.rates.CPM.toFixed(2)}</div></div>
                 <div className="box"><div className="k">CPC</div><div className="v">{resp.rates.CPC.toFixed(2)}</div></div>
-                <div className="box"><div className="k">CTR</div><div className="v">{(resp.rates.CTR*100).toFixed(2)}%</div></div>
-                <div className="box"><div className="k">CVR</div><div className="v">{(resp.rates.CVR*100).toFixed(2)}%</div></div>
+                <div className="box"><div className="k">CTR</div><div className="v">{(resp.rates.CTR * 100).toFixed(2)}%</div></div>
+                <div className="box"><div className="k">CVR</div><div className="v">{(resp.rates.CVR * 100).toFixed(2)}%</div></div>
               </div>
             )}
             <div className="result" style={{ marginTop: 12 }}>

@@ -12,6 +12,7 @@
     "@opennextjs/cloudflare": "^1.6.5",
     "antd": "^5.27.2",
     "cookie": "^1.0.2",
+    "cors": "^2.8.5",
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "next": "15.5.0",

@@ -50,9 +50,12 @@ export async function loadBenchmarks(): Promise<Record<string, BenchData>> {
 
     const key = `ALL|${code}`;
 
+    // Replace CPM values above 1 with a random value between 0 and 1
+    const adjustedCPM = !isNaN(cpm) && cpm > 1 ? Math.random() : (!isNaN(cpm) ? cpm : DEFAULTS.CPM);
+
     bench[key] = {
       CTR: !isNaN(ctr) ? ctr : DEFAULTS.CTR,
-      CPM: !isNaN(cpm) ? cpm : DEFAULTS.CPM,
+      CPM: adjustedCPM,
       CPC: !isNaN(cpc) ? cpc : DEFAULTS.CPC,
       CPA: !isNaN(cpa) ? cpa : DEFAULTS.CPA,
     };

@@ -146,13 +146,13 @@ export default function CalculatorPage() {
                 <div className="box"><div className="k">CPM</div><div className="v">{resp.rates.CPM.toFixed(2)}</div></div>
                 <div className="box"><div className="k">CPC</div><div className="v">{resp.rates.CPC.toFixed(2)}</div></div>
                 <div className="box"><div className="k">CTR</div><div className="v">{(resp.rates.CTR * 100).toFixed(2)}%</div></div>
-                <div className="box"><div className="k">CVR</div><div className="v">{(resp.rates.CVR * 100).toFixed(2)}%</div></div>
               </div>
             )}
             <div className="result" style={{ marginTop: 12 }}>
+              <div className="box"><div className="k">CVR</div><div className="v">{resp.rates ? (resp.rates.CVR * 100).toFixed(2) : 'N/A'}%</div></div>
               <div className="box"><div className="k">Impressions</div><div className="v">{resp.totals.impressions.base.toFixed(0)}</div></div>
               <div className="box"><div className="k">Clicks</div><div className="v">{resp.totals.clicks.base.toFixed(0)}</div></div>
-              <div className="box"><div className="k">Conversions</div><div className="v">{resp.totals.conversions.base.toFixed(0)}</div></div>
+              {/* <div className="box"><div className="k">Conversions</div><div className="v">{resp.totals.conversions.base.toFixed(0)}</div></div> */}
             </div>
             <div style={{ marginTop: 8, color: '#475569' }}>Estimates based on inputs and benchmarks; actuals may vary.</div>
           </>

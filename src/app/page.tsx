@@ -86,7 +86,7 @@ export default function CalculatorPage() {
   return (
     <div className="calc-wrap">
       <div className="calc-card">
-        <h1 className="calc-title">Goal forecast</h1>
+        <h1 className="calc-title">Traffic Calculator</h1>
         <div className="calc-grid" style={{ marginTop: 16 }}>
           <div className="calc-field">
             <label>Website</label>
